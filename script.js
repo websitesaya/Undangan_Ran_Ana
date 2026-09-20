@@ -21,7 +21,7 @@
    ini adalah cara paling sederhana & umum dipakai.
    ========================================================= */
 const CONFIG = {
-  JSONBIN_BIN_ID: "6aa8ffefac6210605acf3d3f",
+  JSONBIN_BIN_ID: "6aaf804affd5d160531b5001",
   JSONBIN_API_KEY: "$2a$10$nou5c3yZntdxwBqnGEEOvuCkZpg9GT4CfSp1IXgNhJpKQzhxI8NYO",
   // ⚠️ TODO: bulan belum diketahui — ganti "10" (Oktober) di bawah ini
   // sesuai bulan pernikahan yang sebenarnya (tanggal 23, tahun 2026).
