@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>The Wedding of Ran &amp; Ana</title>
+<meta name="description" content="Undangan Pernikahan Digital Ran Panggayu &amp; Ana Pakiti">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+  <!-- ============ SNOW OVERLAY ============ -->
+  <canvas id="snow-canvas"></canvas>
+
+  <!-- ============ CURTAIN ============ -->
+  <div class="curtain-panel" id="curtain-left"></div>
+  <div class="curtain-panel" id="curtain-right"></div>
+
+  <!-- ============ COVER / OPENING SCREEN ============ -->
+  <div id="cover">
+    <div class="cover-scrim"></div>
+    <div class="cover-inner">
+      <div class="cover-eyebrow">The Wedding Of</div>
+      <div class="cover-monogram">Ran &amp; Ana</div>
+      <div class="hairline"></div>
+      <div class="cover-guest-label">Kepada Yth. Bapak / Ibu / Saudara / i</div>
+      <div class="cover-guest-name" id="guestName">Tamu Undangan</div>
+
+      <div class="cover-family-invite">
+        <div class="fam-col">
+          <span class="fam-col-title">Turut Mengundang Keluarga<br>Mempelai Pria</span>
+          <ol>
+            <li>Panggayu</li>
+            <li>Habeba</li>
+          </ol>
+        </div>
+        <div class="fam-divider"></div>
+        <div class="fam-col">
+          <span class="fam-col-title">Turut Mengundang Keluarga<br>Mempelai Wanita</span>
+          <ol>
+            <li>Pakiti</li>
+            <li>Karatahi</li>
+          </ol>
+        </div>
+      </div>
+
+      <button class="btn-open" id="openBtn" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        Buka Undangan
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ MAIN INVITATION ============ -->
+  <audio id="bgMusic" loop preload="auto" playsinline>
+    <source src="Richard Marx - Right Here Waiting _ Lirik Terjemahan.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicToggle" type="button" aria-label="Putar / jeda musik">
+    <svg id="musicIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="18" r="3"/><path d="M11 18V4l9-2v13"/><circle cx="20" cy="15" r="3"/></svg>
+  </button>
+
+  <div class="stage">
+
+    <!-- QUOTE -->
+    <section id="quote">
+      <div class="cover-monogram reveal">R&amp;A</div>
+      <div class="verse-frame reveal reveal-delay-1">
+        <p class="verse">"Kasih yang sejati bertumbuh dari kesabaran, dijaga dengan kesetiaan,<br>
+        dan dirayakan bersama dalam suka maupun duka."</p>
+        <div class="verse-ref">— 1 Korintus 13 (parafrase)</div>
+      </div>
+    </section>
+
+    <!-- COUPLE -->
+    <section id="couple" class="botanical-frame">
+      <p class="eyebrow reveal" style="text-align:center">Mempelai</p>
+      <h2 class="section-title reveal">Kami Yang Berbahagia</h2>
+      <p class="section-kicker reveal reveal-delay-1">Dengan penuh syukur, kami mengundang Bapak/Ibu/Saudara/i<br>untuk hadir merayakan hari kasih kami</p>
+      <div class="floral-divider reveal"></div>
+
+      <div class="couple-grid">
+        <div class="couple-card reveal">
+          <div class="couple-photo-frame corner-frame">
+            <span class="cf-tr"></span><span class="cf-bl"></span>
+            <div class="couple-photo-inner">
+              <img class="couple-photo parallax-img" src="assets/images/Mempelai_Pria.jpg" alt="Foto Ran Panggayu">
+            </div>
+          </div>
+          <h3 class="couple-name">Ran Panggayu</h3>
+          <div class="couple-religion">Kristen</div>
+          <div class="couple-role">Mempelai Pria</div>
+          <p class="couple-meta">
+            Putra ke-5,<br>
+            pasangan Bapak <b>Permenas Panggayu</b> &amp;<br>
+            Ibu <b>Yustin Habeba</b>
+          </p>
+        </div>
+
+        <div class="couple-divider"><span class="line"></span>&amp;<span class="line"></span></div>
+
+        <div class="couple-card reveal reveal-delay-1">
+          <div class="couple-photo-frame corner-frame">
+            <span class="cf-tr"></span><span class="cf-bl"></span>
+            <div class="couple-photo-inner">
+              <img class="couple-photo parallax-img" src="assets/images/Mempelai_Wanita.jpg" alt="Foto Ana Pakiti">
+            </div>
+          </div>
+          <h3 class="couple-name">Ana Pakiti</h3>
+          <div class="couple-religion">Kristen</div>
+          <div class="couple-role">Mempelai Wanita</div>
+          <p class="couple-meta">
+            Putri pertama,<br>
+            pasangan Bapak <b>Erwin Deis Pakiti</b> &amp;<br>
+            Ibu <b>Jois Susanti Nyonyie</b>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOVE STORY -->
+    <section class="alt botanical-frame" id="story">
+      <p class="eyebrow reveal" style="text-align:center">Perjalanan Kasih</p>
+      <h2 class="section-title reveal">Kisah Kami</h2>
+      <p class="section-kicker reveal reveal-delay-1">Sedikit cerita perjalanan cinta kami hingga hari bahagia ini</p>
+      <div class="floral-divider reveal"></div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2021 — Berkenalan</div>
+          <div class="timeline-text">Tuhan mempertemukan kami dan menumbuhkan benih persahabatan yang tulus.</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2023 — Berpacaran</div>
+          <div class="timeline-text">Persahabatan itu tumbuh menjadi cinta, kami memutuskan untuk menjalani hubungan bersama.</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2025 — Tunangan</div>
+          <div class="timeline-text">Dengan restu kedua keluarga, kami mengikat janji melalui prosesi pertunangan.</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2026 — Menikah</div>
+          <div class="timeline-text">Dengan penuh syukur, kami memantapkan hati untuk melangkah ke jenjang pernikahan.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="events" class="botanical-frame">
+      <p class="eyebrow reveal" style="text-align:center">Save The Date</p>
+      <h2 class="section-title reveal">Acara Pernikahan</h2>
+      <p class="section-kicker reveal reveal-delay-1">Merupakan suatu kehormatan dan kebahagiaan bagi kami<br>apabila Bapak/Ibu/Saudara/i berkenan hadir</p>
+      <div class="floral-divider reveal"></div>
+
+      <div class="countdown" id="countdown">
+        <div class="cd-box"><div class="num" id="cd-days">00</div><div class="lbl">Hari</div></div>
+        <div class="cd-box"><div class="num" id="cd-hours">00</div><div class="lbl">Jam</div></div>
+        <div class="cd-box"><div class="num" id="cd-mins">00</div><div class="lbl">Menit</div></div>
+        <div class="cd-box"><div class="num" id="cd-secs">00</div><div class="lbl">Detik</div></div>
+      </div>
+
+      <div class="event-card reveal">
+        <h3>Akad &amp; Pemberkatan Nikah</h3>
+        <div class="event-sub">Tgl 23 [Bulan] 2026 · 09:00 WIT</div>
+        <div class="event-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Gereja Nuha Roriwo Baru, Desa Kao Gamlaha</span>
+        </div>
+        <a class="btn-maps" id="mapsPemberkatan" href="https://www.google.com/maps/search/?api=1&query=Gereja+Nuha+Roriwo+Baru+Gamlaha" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Buka Google Maps
+        </a>
+      </div>
+
+      <div class="event-card reveal">
+        <h3>Resepsi</h3>
+        <div class="event-sub">Tgl 23 [Bulan] 2026 · 12:00 WIT</div>
+        <div class="event-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Kediaman Mempelai Pria, Desa Kao Gamlaha</span>
+        </div>
+        <a class="btn-maps" id="mapsResepsi" href="https://www.google.com/maps/search/?api=1&query=Desa+Kao+Gamlaha" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Buka Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="alt botanical-frame" id="gallery">
+      <p class="eyebrow reveal" style="text-align:center">Momen Kami</p>
+      <h2 class="section-title reveal">Galeri Foto</h2>
+      <p class="section-kicker reveal reveal-delay-1">Beberapa potret perjalanan kasih kami</p>
+      <div class="floral-divider reveal"></div>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- populated by script.js from Foto1.jpg .. FotoN.jpg -->
+      </div>
+    </section>
+
+    <div id="lightbox">
+      <button class="lb-close" id="lbClose" aria-label="Tutup">&times;</button>
+      <button class="lb-nav lb-prev" id="lbPrev" aria-label="Sebelumnya">&#8249;</button>
+      <img id="lbImage" src="" alt="Foto prewedding">
+      <button class="lb-nav lb-next" id="lbNext" aria-label="Berikutnya">&#8250;</button>
+    </div>
+
+    <!-- GIFT -->
+    <section id="gift" class="botanical-frame">
+      <p class="eyebrow reveal" style="text-align:center">Wedding Gift</p>
+      <h2 class="section-title reveal">Amplop Digital</h2>
+      <p class="section-kicker reveal reveal-delay-1">Doa restu Bapak/Ibu/Saudara/i adalah karunia terindah bagi kami.<br>Namun jika ingin memberi tanda kasih, kami sediakan nomor rekening berikut.</p>
+      <div class="floral-divider reveal"></div>
+
+      <div class="gift-atm-wrap reveal">
+        <div class="atm-card">
+          <div class="atm-top">
+            <div>
+              <div class="atm-label">Wedding Gift Card</div>
+              <div class="atm-bank">BANK BNI</div>
+            </div>
+            <svg class="atm-nfc" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M6 8c3-3 9-3 12 0M8.5 10.5c1.8-1.8 5.2-1.8 7 0M11 13c.7-.7 2.3-.7 3 0"/>
+            </svg>
+          </div>
+          <div class="atm-chip"></div>
+          <div class="atm-number" id="rekWanita">1962 7442 45</div>
+          <div class="atm-bottom">
+            <div>
+              <div class="atm-holder-label">Card Holder</div>
+              <div class="atm-holder-name">Rosiana Valeria Pakiti</div>
+            </div>
+            <svg class="atm-heart" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21s-7.5-4.6-10-9.2C.5 8.4 2.3 5 5.8 5c2 0 3.4 1 4.2 2.3C10.8 6 12.2 5 14.2 5c3.5 0 5.3 3.4 3.8 6.8C19.5 16.4 12 21 12 21z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="gift-copy-wrap">
+        <button class="btn-copy" data-copy="1962744245">Salin Nomor Rekening</button>
+      </div>
+    </section>
+
+    <!-- WISHES -->
+    <section class="alt botanical-frame" id="wishes">
+      <p class="eyebrow reveal" style="text-align:center">Ucapan &amp; Doa</p>
+      <h2 class="section-title reveal">Kirim Ucapan</h2>
+      <p class="section-kicker reveal reveal-delay-1">Ucapan Anda akan tampil dan dapat dilihat oleh seluruh tamu undangan lainnya</p>
+      <div class="floral-divider reveal"></div>
+
+      <form id="wishForm">
+        <input type="text" id="wishName" placeholder="Nama Anda" required maxlength="60">
+        <select id="wishStatus">
+          <option value="Hadir">Bersedia Hadir</option>
+          <option value="Tidak Hadir">Tidak Dapat Hadir</option>
+          <option value="Ragu">Masih Ragu</option>
+        </select>
+        <textarea id="wishMessage" placeholder="Tuliskan doa & ucapan Anda..." required maxlength="500"></textarea>
+        <button class="btn-send" type="submit" id="wishSubmitBtn">Kirim Ucapan</button>
+      </form>
+
+      <div id="wishList">
+        <p class="wish-loading">Memuat ucapan...</p>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section id="closing">
+      <div class="cover-monogram reveal">R&amp;A</div>
+      <h2 class="section-title reveal" style="color:var(--gold-bright)">Terima Kasih</h2>
+      <p class="reveal">Kehadiran serta doa restu Bapak/Ibu/Saudara/i merupakan<br>
+      suatu kebahagiaan dan kehormatan besar bagi kami.<br>
+      Kami menantikan kehadiran Anda di hari bahagia kami.</p>
+      <div class="closing-family reveal">Ran &amp; Ana</div>
+
+      <div class="social-links reveal">
+        <a class="social-btn" href="https://www.instagram.com/rijald_elimanafe" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="social-btn" href="https://wa.me/6281338596854" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.14c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.8-.11a10.6 10.6 0 01-1.9-.71c-1.9-.83-3.36-2.35-4.28-3.62-.5-.68-.85-1.5-.85-2.34 0-.82.42-1.5.86-1.94.2-.2.44-.24.6-.24h.44c.15 0 .35-.02.53.42.2.5.68 1.73.74 1.86.06.13.1.28.02.44-.08.16-.13.26-.26.4-.13.13-.27.3-.38.4-.13.13-.27.27-.12.53.15.26.68 1.1 1.46 1.79 1 .89 1.85 1.16 2.11 1.29.26.13.42.11.57-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.26.08 1.6.75 1.87.89.26.13.44.2.5.31.06.13.06.71-.18 1.39z"/></svg>
+        </a>
+        <a class="social-btn" href="https://www.tiktok.com/@zhald_design" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.5c-.7-.7-1.1-1.7-1.1-2.8h-3v13.1c0 1.3-1 2.3-2.3 2.3s-2.3-1-2.3-2.3 1-2.3 2.3-2.3c.2 0 .5 0 .7.1v-3.1c-.2 0-.5-.1-.7-.1-3 0-5.4 2.4-5.4 5.4S7.2 21.2 10.2 21.2s5.4-2.4 5.4-5.4V9.1c1.1.8 2.5 1.3 4 1.3V7.4c-1.1 0-2.1-.5-3-1.9z"/></svg>
+        </a>
+      </div>
+      <div class="social-handle">@rijald_elimanafe · 0813 3859 6854 · @zhald_design</div>
+
+      <div class="credit">Wedding Invitation Design by Zhald Design</div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
