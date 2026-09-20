@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generator Undangan — Ran &amp; Ana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon-deep:#2E3A26; --maroon-mid:#47592F;
+    --cream:#FFFFFF; --cream-soft:#F6F8FB; --cream-line:#E1E7F0;
+    --gold:#8A9A54; --gold-bright:#D9E2B0; --gold-deep:#5F6B34;
+    --ink:#101826; --ink-soft:#4C5A72;
+    --font-display:'Cormorant Garamond',serif; --font-body:'EB Garamond',serif;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; font-family:var(--font-body); background:var(--maroon-deep); color:var(--ink);
+    min-height:100vh;
+  }
+  .wrap{ max-width:560px; margin:0 auto; background:var(--cream); min-height:100vh; padding:40px 26px 80px; }
+  h1{ font-family:var(--font-display); text-align:center; color:var(--maroon-mid); font-size:2rem; margin-bottom:4px; }
+  .sub{ text-align:center; color:var(--ink-soft); font-style:italic; margin-bottom:34px; }
+  label{ font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-deep); display:block; margin:18px 0 6px; }
+  input, textarea{
+    width:100%; font-family:var(--font-body); font-size:1rem;
+    padding:12px 14px; border:1px solid var(--cream-line); border-radius:8px; background:var(--cream-soft); color:var(--ink);
+  }
+  textarea{ min-height:120px; resize:vertical; }
+  .hint{ font-size:.78rem; color:var(--ink-soft); margin-top:4px; }
+  .card{
+    background:var(--cream-soft); border:1px solid var(--cream-line); border-radius:14px;
+    padding:22px; margin-top:32px;
+  }
+  .card h2{ font-family:var(--font-display); color:var(--maroon-mid); margin:0 0 6px; font-size:1.4rem; }
+  .result-list{ display:flex; flex-direction:column; gap:14px; margin-top:18px; }
+  .result-item{
+    background:var(--cream); border:1px solid var(--cream-line); border-radius:10px; padding:14px 16px;
+  }
+  .result-item .name{ font-family:var(--font-display); font-size:1.15rem; color:var(--maroon-mid); }
+  .result-item .link{
+    display:block; font-size:.82rem; color:var(--ink-soft); word-break:break-all; margin:6px 0 12px;
+  }
+  .btn-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none; cursor:pointer;
+    font-size:.8rem; letter-spacing:.04em; padding:9px 16px; border-radius:999px; border:1px solid transparent;
+  }
+  .btn-wa{ background:#25D366; color:#fff; }
+  .btn-copy{ background:transparent; border-color:var(--maroon-mid); color:var(--maroon-mid); }
+  .btn-copy.copied{ background:var(--gold); border-color:var(--gold); color:var(--maroon-deep); }
+  .btn-generate{
+    width:100%; margin-top:22px; background:var(--maroon-mid); color:var(--cream); border:none;
+    padding:14px; border-radius:999px; font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer;
+  }
+  .empty{ text-align:center; color:var(--ink-soft); font-style:italic; font-size:.9rem; margin-top:16px; }
+  .footer-note{ text-align:center; font-size:.72rem; color:var(--ink-soft); margin-top:40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Generator Undangan</h1>
+  <p class="sub">Ran &amp; Ana — buat link undangan personal untuk tiap tamu</p>
+
+  <label for="baseUrl">Link Undangan <span id="autoTag" style="text-transform:none;font-weight:normal;color:var(--ink-soft);">(terisi otomatis)</span></label>
+  <input id="baseUrl" type="url" placeholder="https://undangan-ran-ana.com/index.html">
+  <div class="hint">Otomatis mengikuti alamat tempat halaman generator ini dibuka. Cukup ubah jika undangan Anda di-hosting di alamat lain.</div>
+
+  <label for="waMessage">Template Pesan WhatsApp</label>
+  <textarea id="waMessage">Shalom / Salam sejahtera 🙏
+
+Tanpa mengurangi rasa hormat, kami mengundang {nama} untuk hadir di acara pernikahan kami:
+
+*Ran & Ana*
+
+Berikut link undangan digital kami, mohon kiranya {nama} berkenan membuka untuk info lengkap acara:
+{link}
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila {nama} berkenan hadir dan memberikan doa restu.
+
+Terima kasih 🙏🤍</textarea>
+  <div class="hint">Gunakan <b>{nama}</b> untuk nama tamu dan <b>{link}</b> untuk link undangan otomatis.</div>
+
+  <label for="guestNames">Daftar Nama Tamu (satu nama per baris)</label>
+  <textarea id="guestNames" placeholder="Bapak Yohanes&#10;Ibu Maria&#10;Keluarga Besar Taebenu"></textarea>
+
+  <button class="btn-generate" id="generateBtn" type="button">Buat Link Undangan</button>
+
+  <div class="card">
+    <h2>Hasil</h2>
+    <div id="results">
+      <p class="empty">Link undangan untuk tiap tamu akan muncul di sini.</p>
+    </div>
+  </div>
+
+  <p class="footer-note">Tersimpan otomatis di perangkat ini agar tidak perlu isi ulang setiap kali dibuka.</p>
+</div>
+
+<script>
+  // =====================================================================
+  // GANTI DI SINI kalau ingin mengunci link undangan secara pasti.
+  // Contoh: "https://websitesaya.github.io/Undangan_Ran_Ana/index.html"
+  // Kosongkan ("") kalau ingin link dideteksi otomatis dari alamat halaman
+  // generator ini dibuka (biasanya sudah benar dengan sendirinya).
+  // =====================================================================
+  const DEFAULT_INVITATION_URL = "https://websitesaya.github.io/Undangan_Ran_Ana/";
+
+  const baseUrlEl = document.getElementById("baseUrl");
+  const waMessageEl = document.getElementById("waMessage");
+  const guestNamesEl = document.getElementById("guestNames");
+  const resultsEl = document.getElementById("results");
+  const generateBtn = document.getElementById("generateBtn");
+
+  // Simpan preferensi di perangkat ini (localStorage) — aman untuk file statis biasa.
+  const STORAGE_KEY = "cv_invite_generator_v1";
+
+  // Deteksi otomatis link index.html berdasarkan alamat generator.html ini dibuka.
+  // Contoh: https://domain.com/folder/generator.html -> https://domain.com/folder/index.html
+  function detectBaseUrl(){
+    const here = window.location.href.split(/[?#]/)[0]; // buang query/hash
+    if (/generator\.html$/i.test(here)) {
+      return here.replace(/generator\.html$/i, "index.html");
+    }
+    // fallback: ganti file terakhir di path dengan index.html
+    return here.replace(/[^/]*$/, "index.html");
+  }
+
+  function restore(){
+    let saved = {};
+    try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }catch(e){}
+
+    const autoUrl = detectBaseUrl();
+    const isLocalFile = autoUrl.startsWith("file://");
+
+    // Urutan prioritas link undangan:
+    // 1) DEFAULT_INVITATION_URL kalau diisi di atas (paling pasti)
+    // 2) link yang pernah diubah manual oleh pengguna
+    // 3) deteksi otomatis dari alamat generator.html ini dibuka
+    if (DEFAULT_INVITATION_URL) {
+      baseUrlEl.value = DEFAULT_INVITATION_URL;
+    } else if (saved.baseUrlIsCustom && saved.baseUrl) {
+      baseUrlEl.value = saved.baseUrl;
+    } else {
+      baseUrlEl.value = isLocalFile ? (saved.baseUrl || "") : autoUrl;
+    }
+    document.getElementById("autoTag").style.display =
+      (!DEFAULT_INVITATION_URL && !saved.baseUrlIsCustom && !isLocalFile) ? "inline" : "none";
+
+    if (saved.waMessage) waMessageEl.value = saved.waMessage;
+    if (saved.guestNames) guestNamesEl.value = saved.guestNames;
+  }
+  function persist(){
+    const autoUrl = detectBaseUrl();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      baseUrl: baseUrlEl.value,
+      baseUrlIsCustom: baseUrlEl.value.trim() !== autoUrl,
+      waMessage: waMessageEl.value,
+      guestNames: guestNamesEl.value
+    }));
+    document.getElementById("autoTag").style.display = (baseUrlEl.value.trim() === autoUrl) ? "inline" : "none";
+  }
+  restore();
+
+  generateBtn.addEventListener("click", () => {
+    persist();
+    const base = baseUrlEl.value.trim();
+    const template = waMessageEl.value;
+    const names = guestNamesEl.value.split("\n").map(n => n.trim()).filter(Boolean);
+
+    if (!base) { alert("Isi dulu link undangan (base URL) di atas."); return; }
+    if (!names.length) { alert("Isi minimal satu nama tamu."); return; }
+
+    resultsEl.innerHTML = names.map((name, i) => {
+      const link = `${base}${base.includes("?") ? "&" : "?"}to=${encodeURIComponent(name)}`;
+      const text = template.replaceAll("{nama}", name).replaceAll("{link}", link);
+      const waLink = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      return `
+        <div class="result-item">
+          <div class="name">${name}</div>
+          <span class="link" id="link-${i}">${link}</span>
+          <div class="btn-row">
+            <a class="btn btn-wa" href="${waLink}" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 004.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.14c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.8-.11a10.6 10.6 0 01-1.9-.71c-1.9-.83-3.36-2.35-4.28-3.62-.5-.68-.85-1.5-.85-2.34 0-.82.42-1.5.86-1.94.2-.2.44-.24.6-.24h.44c.15 0 .35-.02.53.42.2.5.68 1.73.74 1.86.06.13.1.28.02.44-.08.16-.13.26-.26.4-.13.13-.27.3-.38.4-.13.13-.27.27-.12.53.15.26.68 1.1 1.46 1.79 1 .89 1.85 1.16 2.11 1.29.26.13.42.11.57-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.26.08 1.6.75 1.87.89.26.13.44.2.5.31.06.13.06.71-.18 1.39z"/></svg>
+              Bagikan via WhatsApp
+            </a>
+            <button class="btn btn-copy" onclick="copyLink('${link.replace(/'/g,"\\'")}', this)">Salin Link</button>
+          </div>
+        </div>`;
+    }).join("");
+  });
+
+  function copyLink(link, btn){
+    navigator.clipboard.writeText(link).then(() => {
+      const original = btn.textContent;
+      btn.textContent = "Tersalin!";
+      btn.classList.add("copied");
+      setTimeout(() => { btn.textContent = original; btn.classList.remove("copied"); }, 1600);
+    });
+  }
+
+  [baseUrlEl, waMessageEl, guestNamesEl].forEach(el => el.addEventListener("change", persist));
+</script>
+</body>
+</html>
